@@ -1,0 +1,7 @@
+<h2>{{ book.title }}</h2>
+<p>Автор: {{ book.author }}</p>
+<p>Статус: {{ book.is_taken|yesno:"Взята,Вільна" }}</p>
+{% if book.taken_by %}
+    <p>Користувач: {{ book.taken_by.email }}</p>
+{% endif %}
+<a href="{% url 'book_list' %}">← Назад</a>

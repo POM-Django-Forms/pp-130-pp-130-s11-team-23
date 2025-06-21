@@ -1,0 +1,15 @@
+<h2>Вітаємо, {{ user.first_name }}!</h2>
+
+<p>Ви увійшли як: <strong>{{ user.email }}</strong></p>
+<p>Роль: {{ user.get_role_name }}</p>
+
+<hr>
+
+<ul>
+    <li><a href="{% url 'book_list' %}">📚 Переглянути книги</a></li>
+    {% if user.role == 1 %}
+        <li><a href="{% url 'user_list' %}">👥 Користувачі</a></li>
+    {% endif %}
+    <li><a href="{% url 'author_list' %}">Переглянути авторів</a></li>
+    <li><a href="{% url 'login' %}">🚪 Вийти</a></li>
+</ul>

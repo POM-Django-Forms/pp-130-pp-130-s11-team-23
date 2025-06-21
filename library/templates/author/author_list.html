@@ -1,0 +1,12 @@
+<h1>Список авторів</h1>
+<a href="{% url 'add_author' %}">Додати автора</a>
+<ul>
+    {% for author in authors %}
+        <li>
+            {{ author.name }} {{ author.surname }} {{ author.patronymic }}
+            <a href="{% url 'delete_author' author.id %}">Видалити</a>
+        </li>
+    {% empty %}
+        <li>Авторів немає</li>
+    {% endfor %}
+</ul>

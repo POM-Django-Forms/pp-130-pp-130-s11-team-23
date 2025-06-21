@@ -1,0 +1,29 @@
+<h2>Список книг</h2>
+
+<form method="get">
+    <input type="text" name="title" placeholder="Назва" value="{{ request.GET.title }}">
+    <input type="text" name="author" placeholder="Автор" value="{{ request.GET.author }}">
+    <button type="submit">Фільтрувати</button>
+</form>
+
+<ul>
+    {% for book in books %}
+        <li>
+            <a href="{% url 'book_detail' book.id %}">
+                {{ book.name }} — {{ book.description }}
+            </a>
+            <br>
+            <small>Автори: 
+                {% for author in book.authors.all %}
+                    {{ author.name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    (немає)
+                {% endfor %}
+            </small>
+        </li>
+    {% empty %}
+        <li>Немає книг</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'add_book' %}">Додати нову книгу</a>

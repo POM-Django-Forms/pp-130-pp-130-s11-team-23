@@ -1,0 +1,8 @@
+<h2>Книги користувача {{ user.email }}</h2>
+<ul>
+    {% for book in books %}
+        <li>{{ book.title }} ({{ book.author }})</li>
+    {% empty %}
+        <li>Цей користувач не має книг</li>
+    {% endfor %}
+</ul>

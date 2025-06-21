@@ -1,0 +1,21 @@
+<h2>Всі замовлення</h2>
+<ul>
+    {% for order in orders %}
+        <li>
+            Книга: {{ order.book.name }}<br>
+            Користувач: {{ order.user.email }}<br>
+            Створено: {{ order.created_at }}<br>
+            Заплановане повернення: {{ order.plated_end_at }}<br>
+            Повернуто: {{ order.end_at|default:"(ще не повернено)" }}
+            {% if request.user.role == 1 and not order.end_at %}
+                <form method="post" action="{% url 'close_order' order.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Закрити замовлення</button>
+                </form>
+            {% endif %}
+        </li>
+        <hr>
+    {% empty %}
+        <p>Замовлень немає</p>
+    {% endfor %}
+</ul>

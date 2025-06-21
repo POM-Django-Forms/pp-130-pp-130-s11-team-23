@@ -1,0 +1,14 @@
+<h2>Мої замовлення</h2>
+<ul>
+    {% for order in orders %}
+        <li>
+            Книга: {{ order.book.name }}<br>
+            Створено: {{ order.created_at }}<br>
+            Заплановане повернення: {{ order.plated_end_at|date:"d.m.Y" }}<br>
+            Повернуто: {{ order.end_at|default:"(ще не повернено)" }}
+        </li>
+        <hr>
+    {% empty %}
+        <p>У вас ще немає замовлень</p>
+    {% endfor %}
+</ul>
